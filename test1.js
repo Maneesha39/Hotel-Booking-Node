@@ -15,6 +15,7 @@ function test4() {
 
 function test9() {
     console.log("I'm in test9 file")
+}
     function test8() {
         console.log("Im in test 8 file")
     }
