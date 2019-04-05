@@ -13,11 +13,8 @@ function test4() {
     console.log("I'm in test4 file")
 }
 
-<<<<<<< Updated upstream
 function test9() {
     console.log("I'm in test9 file")
-=======
-function test8() {
-    console.log("Im in test 8 file")
->>>>>>> Stashed changes
-}
+    function test8() {
+        console.log("Im in test 8 file")
+    }
