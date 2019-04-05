@@ -19,3 +19,6 @@ function test9() {
     function test8() {
         console.log("Im in test 8 file")
     }
+function test7() {
+    console.log("I'm in test7 file")
+}
