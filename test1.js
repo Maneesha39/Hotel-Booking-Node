@@ -12,3 +12,7 @@ function test2() {
 function test4() {
     console.log("I'm in test4 file")
 }
+
+function test9() {
+    console.log("I'm in test9 file")
+}
