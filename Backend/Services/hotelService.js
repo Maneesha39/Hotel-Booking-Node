@@ -5,3 +5,14 @@ exports.getHotels = async () => {
     console.log(result);
     return result;
 }
+
+exports.insert = async (hotel) => {
+    try {
+        const hotelsData = JSON.parse(JSON.stringify(hotel))
+        await knex.insert(hotelsData).table('hotel_list')
+    } catch (err) {
+        console.log(err)
+        throw 'Unable to insert hotels'
+    }
+}
+

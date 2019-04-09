@@ -7,4 +7,15 @@ router.get('/', async (req, res) => {
     res.json({ hotels: hotelsList })
 })
 
+router.post('/', async (req, res) => {
+    try {
+        console.log("I'm in hotels")
+        await hotelService.insert(req.body);
+        res.json({ message: "Inserted hotels successfully" })
+    } catch (err) {
+        console.log(err);
+        res.status(422).json({ message: err })
+    }
+})
+
 module.exports = router
