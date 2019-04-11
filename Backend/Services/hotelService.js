@@ -7,6 +7,12 @@ exports.getHotels = async () => {
     return result;
 }
 
+exports.getHotelsByPlace = async (place) => {
+    return await knex.select("*").from("hotel_list").where({ place: place });
+
+
+}
+
 exports.insert = async (hotels) => {
     try {
         const hotelsData = JSON.parse(JSON.stringify(hotels))

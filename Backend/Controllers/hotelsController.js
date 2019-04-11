@@ -7,6 +7,14 @@ router.get('/', async (req, res) => {
     res.json({ hotels: hotelsList })
 })
 
+router.get('/', async (req, res) => {
+    const place = req.query.place
+
+    const hotelsList = await hotelService.getHotelsByPlace(place)
+    res.json({ HotelsList: hotelsList });
+
+})
+
 router.post('/', async (req, res) => {
     try {
         console.log("I'm in hotels")
