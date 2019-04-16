@@ -3,13 +3,24 @@ const knex = require('../db');
 exports.getHotels = async () => {
     // const result = await knex.select('*').from("hotel_list")
     const result = await knex.select('*').from('hotel_list');
-    console.log(result);
+    // console.log(result);
     return result;
 }
 
 exports.getHotelsBySearch = async (place) => {
 
-    return await knex.select("*").from("hotel_list").where({ city: place });
+    return await knex.select("*").from("hotel_list").where('city', 'ilike', place + '%');
+
+
+}
+
+exports.getHotelsByID = async (id) => {
+
+
+    console.log(id)
+    return await knex.select("*").from("hotel_list").where({ id: id });
+
+
 
 
 }
@@ -54,5 +65,16 @@ exports.insertRoom = async (name, room) => {
     catch (err) {
         console.log(err)
         throw 'Unable to add room'
+    }
+}
+
+exports.bookRoom = async (hotels) => {
+    try {
+        const bookingData = JSON.parse(JSON.stringify(hotels))
+        await knex.insert(bookingData).table('bookings')
+    }
+    catch (err) {
+        console.log(err)
+        throw 'Unable to insert hotels'
     }
 }
