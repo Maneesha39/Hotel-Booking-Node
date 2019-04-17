@@ -6,33 +6,17 @@ exports.getHotels = async () => {
     // console.log(result);
     return result;
 }
-
 exports.getHotelsBySearch = async (place) => {
 
     return await knex.select("*").from("hotel_list").where('city', 'ilike', place + '%');
-
-
 }
 
 exports.getHotelsByID = async (id) => {
-
-
     console.log(id)
     return await knex.select("*").from("hotel_list").where({ id: id });
-
-
-
-
 }
-
-
-
-
-
-exports.getHotelsByPlace = async (place) => {
-    return await knex.select("*").from("hotel_list").where({ place: place });
-
-
+exports.getHotelsByPlace = async (city) => {
+    return await knex.select("*").from("hotel_list").where({ city: city });
 }
 
 exports.insert = async (hotels) => {
@@ -45,7 +29,6 @@ exports.insert = async (hotels) => {
         throw 'Unable to insert hotels'
     }
 }
-
 
 exports.insertRoom = async (name, room) => {
     try {
