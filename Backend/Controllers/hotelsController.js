@@ -16,12 +16,21 @@ const hotelService = require('../Services/hotelService');
 // })
 
 
-// router.get('/', async (req, res) => {
 
-//     const hotelsList = await hotelService.getHotels()
-//     res.json({ hotels: hotelsList })
-// })
 
+router.get('/', async (req, res) => {
+
+    const hotelsList = await hotelService.getHotels()
+    res.json({ hotels: hotelsList })
+})
+
+router.get('/', async (req, res) => {
+    const city = req.query.city
+    console.log(city);
+    const hotelsList = await hotelService.getHotelsByPlace(city)
+    res.json({ hotels: hotelsList })
+    console.log(hotelsList);
+})
 
 
 router.get('/hoteldetails/:id', async (req, res) => {
@@ -32,13 +41,7 @@ router.get('/hoteldetails/:id', async (req, res) => {
     console.log(hotelsList);
 })
 
-router.get('/', async (req, res) => {
-    const city = req.query.city
-    console.log(city);
-    const hotelsList = await hotelService.getHotelsByPlace(city)
-    res.json({ hotels: hotelsList })
-    console.log(hotelsList);
-})
+
 
 
 
