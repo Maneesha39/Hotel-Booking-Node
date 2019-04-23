@@ -16,7 +16,7 @@ exports.getHotelsByID = async (id) => {
     return await knex.select("*").from("hotel_list").where({ id: id });
 }
 exports.getHotelsByPlace = async (city) => {
-    return await knex.select("*").from("hotel_list").where({ city: city });
+    return await knex.select("*").from("hotel_list").where('city', 'ilike', city);
 }
 
 exports.insert = async (hotels) => {

@@ -24,8 +24,8 @@ router.get('/', async (req, res) => {
     res.json({ hotels: hotelsList })
 })
 
-router.get('/', async (req, res) => {
-    const city = req.query.city
+router.get('/:city', async (req, res) => {
+    const city = req.params.city
     console.log(city);
     const hotelsList = await hotelService.getHotelsByPlace(city)
     res.json({ hotels: hotelsList })
