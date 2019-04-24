@@ -1,15 +1,17 @@
 const knex = require('../db');
 
 exports.getHotels = async () => {
-    // const result = await knex.select('*').from("hotel_list")
     const result = await knex.select('*').from('hotel_list');
-    // console.log(result);
     return result;
 }
-exports.getHotelsBySearch = async (place) => {
 
-    return await knex.select("*").from("hotel_list").where('city', 'ilike', place + '%');
+exports.getCities = async () => {
+    const result = await knex.select('*').from('hotel_list');
+    return result;
 }
+
+
+
 
 exports.getHotelsByID = async (id) => {
     console.log(id)
@@ -32,7 +34,7 @@ exports.insert = async (hotels) => {
 
 exports.insertRoom = async (name, room) => {
     try {
-        // const hotelsData = JSON.parse(JSON.stringify(room))
+
         const result = await knex.select('rooms').table('hotel_list').where({ 'hotel_list.name': name })
         console.log(result);
 

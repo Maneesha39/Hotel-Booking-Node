@@ -9,6 +9,6 @@ app.use(bodyParser.json())
 
 app.use('/hotels', hotelsController);
 
-app.use('/hotelBySearchText', hotelSearchController);
+app.use('/cities', hotelSearchController);
 
 module.exports = app
