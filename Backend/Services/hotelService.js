@@ -6,12 +6,9 @@ exports.getHotels = async () => {
 }
 
 exports.getCities = async () => {
-    const result = await knex.select('*').from('hotel_list');
+    const result = await knex('hotel_list').distinct('city');
     return result;
 }
-
-
-
 
 exports.getHotelsByID = async (id) => {
     console.log(id)
@@ -55,8 +52,8 @@ exports.insertRoom = async (name, room) => {
 
 exports.bookRoom = async (hotels) => {
     try {
-        const bookingData = JSON.parse(JSON.stringify(hotels))
-        await knex.insert(bookingData).table('bookings')
+        // const bookingData = JSON.parse(JSON.stringify(hotels))
+        await knex.insert(hotels).table('bookings')
     }
     catch (err) {
         console.log(err)

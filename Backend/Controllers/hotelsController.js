@@ -2,11 +2,11 @@ const router = require('express').Router();
 const hotelService = require('../Services/hotelService');
 
 
-router.get('/', async (req, res) => {
+// router.get('/', async (req, res) => {
 
-    const hotelsList = await hotelService.getHotels()
-    res.json({ hotels: hotelsList })
-})
+//     const hotelsList = await hotelService.getHotels()
+//     res.json({ hotels: hotelsList })
+// })
 
 router.get('/:city', async (req, res) => {
     const city = req.params.city
