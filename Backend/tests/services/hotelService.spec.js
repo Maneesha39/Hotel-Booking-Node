@@ -2,15 +2,21 @@ const hotelService = require('../../Services/hotelService');
 
 
 
-// {
-//     "id": 7,
-//     "name": "The Park Chennai",
-//     "image": "/assets/122446594.jpg",
-//     "price": "9999",
-//     "place": "Mylapore",
-//     "landmark": "Near:City Centre\n",
-//     "pincode": "600004",
-//     "mobile": "9642811470",
-//     "city": "Chennai",
-//     "rooms": 14
-// }
+
+describe('hotel Service', () => {
+    describe('hotel Service for getting hotel names', () => {
+        it('should fetch hotel names from db', () => {
+
+            const names = [
+
+                {
+                    "name": "Hilton"
+                }
+
+            ]
+            hotelService.getHotelNames = jest.fn().mockReturnValue(names)
+
+        })
+
+    })
+})

@@ -8,6 +8,12 @@ const hotelService = require('../Services/hotelService');
 //     res.json({ hotels: hotelsList })
 // })
 
+router.get('/', async (req, res) => {
+
+    const hotelNames = await hotelService.getHotelNames()
+    res.json({ names: hotelNames })
+})
+
 router.get('/:city', async (req, res) => {
     const city = req.params.city
     console.log(city);
@@ -54,7 +60,8 @@ router.post('/addroom', async (req, res) => {
 
 router.post('/bookroom', async (req, res) => {
     try {
-        await hotelService.bookRoom(req.body)
+        const { room, id } = req.body
+        await hotelService.bookRoom(room, id)
         res.json({ message: "Hotel Booked Successfully" })
     }
     catch (err) {
