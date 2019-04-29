@@ -5,16 +5,20 @@ const knex = require('../db');
 //     return result;
 // }
 
+
+//To get hotel Names for add room component
 exports.getHotelNames = async () => {
     const result = await knex('hotel_list').distinct('name');
     return result;
 }
 
+//To get cities for home component 
 exports.getCities = async () => {
     const result = await knex('hotel_list').distinct('city');
     return result;
 }
 
+//To get selected hotel 
 exports.getHotelsByID = async (id) => {
     console.log(id)
     return await knex.select("*").from("hotel_list").where({ id: id });
@@ -38,13 +42,7 @@ exports.insertRoom = async (name, room) => {
     try {
         const result = await knex.select('rooms').table('hotel_list').where({ 'hotel_list.name': name })
         console.log(result);
-
-        const re = result.map(function (item) {
-            console.log(item.rooms);
-            return item.rooms;
-        });
-
-        await knex('hotel_list').where({ 'hotel_list.name': name }).update('rooms', parseInt(re) + room)
+        await knex('hotel_list').where({ 'hotel_list.name': name }).update('rooms', result[0].rooms + room)
         return;
     }
     catch (err) {
@@ -59,9 +57,11 @@ exports.bookRoom = async (room, id) => {
     bookingData.hotel_id = id
     console.log(room)
     await knex.insert(bookingData).table('bookings')
-
+    const result = await knex.select('rooms').table('hotel_list').where({ 'id': id })
+    await knex('hotel_list').where({ 'id': id }).update('rooms', (result[0].rooms) - 1)
     return;
 
-
     throw 'Unable to insert hotels'
+
+
 }
