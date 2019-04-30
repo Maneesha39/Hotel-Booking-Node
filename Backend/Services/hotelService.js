@@ -18,15 +18,17 @@ exports.getCities = async () => {
     return result;
 }
 
-//To get selected hotel 
+//To get selected hotel for hotel discription component
 exports.getHotelsByID = async (id) => {
     console.log(id)
     return await knex.select("*").from("hotel_list").where({ id: id });
 }
+//To get list of hotels selected by selected city in home components for hotels list component
 exports.getHotelsByPlace = async (city) => {
     return await knex.select("*").from("hotel_list").where('city', 'ilike', city);
 }
 
+//To add new hotel to data base.
 exports.insert = async (hotels) => {
     try {
         const hotelsData = JSON.parse(JSON.stringify(hotels))
@@ -38,6 +40,7 @@ exports.insert = async (hotels) => {
     }
 }
 
+// To add rooms to existing hotels
 exports.insertRoom = async (name, room) => {
     try {
         const result = await knex.select('rooms').table('hotel_list').where({ 'hotel_list.name': name })
@@ -51,14 +54,16 @@ exports.insertRoom = async (name, room) => {
     }
 }
 
+// To insert booked hotel data in the data base and to reduce the room count
 exports.bookRoom = async (room, id) => {
 
     const bookingData = JSON.parse(JSON.stringify(room))
     bookingData.hotel_id = id
-    console.log(room)
+    console.log(room);
+    console.log(bookingData.room);
     await knex.insert(bookingData).table('bookings')
     const result = await knex.select('rooms').table('hotel_list').where({ 'id': id })
-    await knex('hotel_list').where({ 'id': id }).update('rooms', (result[0].rooms) - 1)
+    await knex('hotel_list').where({ 'id': id }).update('rooms', (result[0].rooms) - bookingData.rooms)
     return;
 
     throw 'Unable to insert hotels'
