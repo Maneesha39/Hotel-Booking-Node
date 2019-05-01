@@ -2,17 +2,15 @@ const router = require('express').Router();
 const hotelService = require('../Services/hotelService');
 
 
-// router.get('/', async (req, res) => {
-
-//     const hotelsList = await hotelService.getHotels()
-//     res.json({ hotels: hotelsList })
-// })
+//api for getting hotel names for addrooms component
 
 router.get('/', async (req, res) => {
 
     const hotelNames = await hotelService.getHotelNames()
     res.json({ names: hotelNames })
 })
+
+//to get list of hotels as per city
 
 router.get('/:city', async (req, res) => {
     const city = req.params.city
@@ -22,6 +20,7 @@ router.get('/:city', async (req, res) => {
     console.log(hotelsList);
 })
 
+//to get selected hotel alone in hotel description component
 
 router.get('/hoteldetails/:id', async (req, res) => {
     const id = req.params.id
@@ -30,6 +29,8 @@ router.get('/hoteldetails/:id', async (req, res) => {
     res.json({ hotels: hotelsList })
     console.log(hotelsList);
 })
+
+//to add new hotels to db
 
 router.post('/', async (req, res) => {
     try {
@@ -42,6 +43,7 @@ router.post('/', async (req, res) => {
         res.status(422).json({ message: err })
     }
 })
+//to add rooms to existing hotels
 
 router.post('/addroom', async (req, res) => {
     try {
@@ -57,6 +59,8 @@ router.post('/addroom', async (req, res) => {
         res.status(422).json({ message: err })
     }
 })
+
+//to insert bookings in db
 
 router.post('/bookroom', async (req, res) => {
     try {
