@@ -1,8 +1,6 @@
 const knex = require('../db');
 
 
-
-
 //To get hotel Names for add room component
 exports.getHotelNames = async () => {
     const result = await knex('hotel_list').distinct('name');
